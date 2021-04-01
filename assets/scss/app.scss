@@ -1,5 +1,9 @@
 @import 'variables';
 
-h1 {
-    background: $heading-color;
-}
+@import 'fonts';
+
+@import 'auth';
+
+// sweet alert
+@import '~sweetalert2/src/variables';
+@import '~sweetalert2/src/sweetalert2';

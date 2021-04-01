@@ -1,6 +1,7 @@
 # pemas
+Application Pengaduan Masyarakt for UJIKOM with Nuxt.js
 
-## Build Setup
+# Build Setup
 
 ```bash
 # install dependencies

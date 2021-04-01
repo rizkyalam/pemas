@@ -22,6 +22,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/swal.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,6 +40,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    'nuxt-fontawesome',
+    'vue-sweetalert2'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -53,5 +56,15 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  //alternative place for config
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+    ],    
   }
 }
