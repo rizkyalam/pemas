@@ -27,8 +27,8 @@
             <input type="password" placeholder="Masukan Password" class="form-control" id="password" required>
           </div>
           <div class="form-group">
-            <label for="password">Password Konfirmasi</label>
-            <input type="password" placeholder="Masukan Password" class="form-control" id="password" required>
+            <label for="password-confirm">Password Konfirmasi</label>
+            <input type="password" placeholder="Masukan Password Konfirmasi" class="form-control" id="password-confirm" required>
           </div>
           <div class="form-group">
             <label for="ktp">Foto KTP</label>

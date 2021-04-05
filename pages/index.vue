@@ -9,14 +9,14 @@
       <!-- Form Login -->
       <div class="login-form">
         <h1 class="text-3xl">Login</h1>
-        <form @submit.prevent="login()">
+        <form @submit.prevent="submitLogin()">
           <div class="form-group">
             <fa :icon="fas.faUser" class="icon"/>
-            <input type="text" placeholder="username" class="form-control" required>
+            <input type="text" placeholder="username" class="form-control" v-model="username" required>
           </div>
           <div class="form-group">
             <fa :icon="fas.faLock" class="icon"/>
-            <input type="password" placeholder="password" class="form-control" required>
+            <input type="password" placeholder="password" class="form-control" v-model="password" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn-login">Masuk</button>
@@ -36,20 +36,39 @@
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
+  data() {
+    return {
+      username: null,
+      password: null
+    }
+  },
   computed: {
     fas () {
         return fas
     },
   },
   methods: {
-    login() {
-      this.$swal('Login Gagal');
+    async submitLogin() {
+      try {
+        const data = await this.$axios.$post('http://127.0.0.1:8000/auth/login', {      
+          username: this.username,
+          password: this.password,      
+        })
+    
+        this.$swal({
+          icon: 'success',
+          text: 'Login Berhasil',
+        })
+        .then( () => {
+          this.$router.push('/user')
+        });
+      } catch (e) {
+        this.$swal({
+          icon: 'error',
+          text: 'Username atau password salah !',
+        })
+      }
     }
-  },
-  async asyncData({$axios}) {
-    const data = await $axios.$get('http://127.0.0.1:8000/masyarakat/all');
-
-    console.log(data);
   },
 }
 </script>
