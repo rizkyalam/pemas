@@ -1,1 +1,22 @@
+// color
 $bg-auth-color: rgb(0, 98, 230);
+$primary-color: #60a5fa;
+$secondary-color: #d1d5db ;
+$danger-color: #ef4444;
+$warning-color: #fbbf24;
+$info-color: #3b82f6;
+$success-color: #34d399 ;
+
+@mixin btn ($bg-color, $text-color: #fff, $size: 7px 10px, $radius: 5px) {
+    background: $bg-color;
+    color: $text-color;
+    border-radius: $radius;
+    padding: $size;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) ;
+    width: auto;
+
+    &:hover {
+        background: darken($bg-color, 15%);
+        color: darken($text-color, 15%);
+    }
+}

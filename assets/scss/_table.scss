@@ -1,0 +1,40 @@
+$border-color-table: #d1d5db;
+
+.table-data {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.3rem;
+    overflow-x: auto;
+
+    @media screen and (max-width: 768px) {
+        width: 100vw;
+    }
+
+    td,
+    th {
+        border-right: 1px solid $border-color-table;
+        border-left: 1px solid $border-color-table;
+    }
+
+    thead {
+        padding: 1.5rem 0;
+        border-top: 1px solid $border-color-table;
+        border-bottom: 1px solid $border-color-table;
+    }
+
+    tbody {
+        border-bottom: 1px solid $border-color-table;
+
+        tr + tr {
+            border-top: 1px solid $border-color-table;
+        }
+    }
+
+    img {
+        object-fit: contain;
+        object-position: center;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+}

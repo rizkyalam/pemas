@@ -51,7 +51,7 @@ export default {
   methods: {
     async submitLogin() {
       try {
-        const user = await this.$axios.$post(`${this.$store.state.auth.base_url}auth/login`, {
+        const user = await this.$axios.$post(`auth/login`, {
           username: this.username,
           password: this.password,      
         });
@@ -61,7 +61,7 @@ export default {
         sessionStorage.setItem('access_token', JSON.stringify(access_token));
 
         const profile = await this.$axios({
-          url: `${this.$store.state.auth.base_url}auth/me`,
+          url: `auth/me`,
           method: 'post',
           headers : {
             Authorization: `bearer ${access_token}`

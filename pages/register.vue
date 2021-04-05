@@ -79,7 +79,7 @@ export default {
     async submitForm() {
       try {
         await this.$axios({
-          url: `${this.$store.state.auth.base_url}masyarakat/store`,
+          url: `masyarakat/store`,
           method: 'post',
           headers : {
             'Content-Type': 'multipart/form-data'

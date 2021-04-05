@@ -25,25 +25,25 @@
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="masyarakat">
+                <nuxt-link to="/user/masyarakat">
                     <fa :icon="fas.faUser"/>
                     <span>Data Masyarakat</span>
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="petugas">
+                <nuxt-link to="/user/petugas">
                     <fa :icon="fas.faUserTie"/>
                     <span>Data Petugas</span>
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="laporan">
+                <nuxt-link to="/user/laporan">
                     <fa :icon="fas.faFileAlt"/>
                     <span>Data Laporan</span>
                 </nuxt-link>
             </li>
             <li>
-                <nuxt-link to="tanggapan">
+                <nuxt-link to="/user/tanggapan">
                     <fa :icon="fas.faClipboardList"/>
                     <span>Data Tanggapan</span>
                 </nuxt-link>
@@ -121,9 +121,9 @@ $primary-color: #60a5fa;
     }
 
     @media screen and (max-width: 768px) {
-        // display: none;
+        display: none;
         height: 100vh;
-        width: 70%;
+        width: 0%;
         position: fixed;
         z-index: 3;
         top: 0;
