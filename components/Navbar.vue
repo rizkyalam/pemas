@@ -39,6 +39,10 @@ export default {
                 confirmButtonText: 'Logout'
             }).then((result) => {
                 if(result.isConfirmed) {
+                    this.$store.commit('auth/logout');
+
+                    sessionStorage.clear();
+
                     this.$router.push('/')
                 }
             })

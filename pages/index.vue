@@ -42,6 +42,7 @@ export default {
       password: null
     }
   },
+  middleware: 'login',
   computed: {
     fas () {
         return fas
@@ -50,17 +51,36 @@ export default {
   methods: {
     async submitLogin() {
       try {
-        const data = await this.$axios.$post('http://127.0.0.1:8000/auth/login', {      
+        const user = await this.$axios.$post(`${this.$store.state.auth.base_url}auth/login`, {
           username: this.username,
           password: this.password,      
-        })
-    
+        });
+
+        const { access_token } = user;
+
+        sessionStorage.setItem('access_token', JSON.stringify(access_token));
+
+        const profile = await this.$axios({
+          url: `${this.$store.state.auth.base_url}auth/me`,
+          method: 'post',
+          headers : {
+            Authorization: `bearer ${access_token}`
+          }          
+        });
+
+        const data = {
+          token: access_token,
+          profile: profile.data
+        }
+
+        this.$store.commit('auth/loginSuccess', data)        
+
         this.$swal({
           icon: 'success',
           text: 'Login Berhasil',
         })
         .then( () => {
-          this.$router.push('/user')
+          this.$router.push('/user/dashboard')
         });
       } catch (e) {
         this.$swal({

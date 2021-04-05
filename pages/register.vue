@@ -5,30 +5,30 @@
       <!-- Form Login -->
       <div class="registrasi-form">
         <h1 class="text-3xl">Registrasi Akun</h1>
-        <form action="">
+        <form @submit.prevent="submitForm()">
           <div class="form-group">
             <label for="nama">Nama Lengkap</label>
-            <input type="text" placeholder="Masukan Nama Lengkap" class="form-control" id="nama" required>
+            <input type="text" placeholder="Masukan Nama Lengkap" class="form-control" id="nama" v-model="nama" required>
           </div>
           <div class="form-group">
             <label for="nik">NIK</label>
-            <input type="number" placeholder="Masukan NIK" class="form-control" id="nik" required>
+            <input type="number" placeholder="Masukan NIK" class="form-control" id="nik" v-model="nik" required>
           </div>
           <div class="form-group">
             <label for="telp">Nomor Telepon</label>
-            <input type="number" placeholder="Masukan Nomor Telepon" class="form-control" id="telp" required>
+            <input type="number" placeholder="Masukan Nomor Telepon" class="form-control" id="telp" v-model="telp" required>
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" placeholder="Masukan username" class="form-control" id="username" required>
+            <input type="text" placeholder="Masukan username" class="form-control" id="username" v-model="username" required>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" placeholder="Masukan Password" class="form-control" id="password" required>
+            <input type="password" placeholder="Masukan Password" class="form-control" id="password" v-model="password1" required>
           </div>
           <div class="form-group">
             <label for="password-confirm">Password Konfirmasi</label>
-            <input type="password" placeholder="Masukan Password Konfirmasi" class="form-control" id="password-confirm" required>
+            <input type="password" placeholder="Masukan Password Konfirmasi" class="form-control" id="password-confirm" v-model="password2" required>
           </div>
           <div class="form-group">
             <label for="ktp">Foto KTP</label>
@@ -39,8 +39,8 @@
           </div>
         </form>
         <p class="text-sm mb-8">
-            Sudah punya akun ?  
-            <nuxt-link to="/" class="text-blue-600">Login Sekarang</nuxt-link>
+          Sudah punya akun ?  
+          <nuxt-link to="/" class="text-blue-600">Login Sekarang</nuxt-link>
         </p>
       </div>
 
@@ -50,7 +50,58 @@
 
 <script>
 export default {
+  data() {
+    return {
+      nama: null,
+      nik: null,
+      telp: null,
+      username: null,
+      password1: null,
+      password2: null,
+    }
+  },
+  middleware: 'login',
+  methods: {
+    dataRegister() {
+      const data = new FormData();
+      const foto = document.querySelector('#ktp');
 
+      data.append('nama', this.nama);
+      data.append('nik', this.nik);
+      data.append('telp', this.telp);
+      data.append('username', this.username);
+      data.append('password1', this.password1);
+      data.append('password2', this.password2);
+      data.append('foto', foto.files[0]);
+
+      return data;
+    },
+    async submitForm() {
+      try {
+        await this.$axios({
+          url: `${this.$store.state.auth.base_url}masyarakat/store`,
+          method: 'post',
+          headers : {
+            'Content-Type': 'multipart/form-data'
+          },
+          data: this.dataRegister()
+        })
+
+        this.$swal({
+          icon: 'success',
+          text: 'Registrasi akun berhasil',
+        })
+        .then( () => {
+          this.$router.push('/')
+        });
+      } catch (e) {
+        this.$swal({
+          icon: 'error',
+          text: e
+        })
+      }
+    }
+  }
 }
 </script>
 

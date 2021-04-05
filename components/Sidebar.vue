@@ -2,7 +2,7 @@
     <div class="sidebar shadow-md">
         <div class="profile">
             <img src="/image/profile.svg" alt="Photo Profile">
-            <h4>Admin</h4>
+            <h4>{{ nama }}</h4>
         </div>
         
         <fa :icon="fas.faTimesCircle" class="close-sidebar" @click.prevent="closeSidebar()"/>
@@ -10,51 +10,51 @@
         <hr class="sidebar-divider">
 
         <ul class="menu">
-            <li class="active">
-                <a href="#">
+            <li>
+                <nuxt-link to="/user/dashboard">
                     <fa :icon="fas.faHome"/>
                     <span>Dashboard</span>                    
-                </a>
+                </nuxt-link>
             </li>
             <hr class="sidebar-divider">
             <h6>Admin</h6>
             <li>
-                <a href="#">
+                <nuxt-link to="verify">
                     <fa :icon="fas.faCheck"/>
                     <span>Verifikasi Laporan</span>                    
-                </a>
+                </nuxt-link>
             </li>
             <li>
-                <a href="#">
+                <nuxt-link to="masyarakat">
                     <fa :icon="fas.faUser"/>
                     <span>Data Masyarakat</span>
-                </a>
+                </nuxt-link>
             </li>
             <li>
-                <a href="#">
+                <nuxt-link to="petugas">
                     <fa :icon="fas.faUserTie"/>
                     <span>Data Petugas</span>
-                </a>
+                </nuxt-link>
             </li>
             <li>
-                <a href="#">
+                <nuxt-link to="laporan">
                     <fa :icon="fas.faFileAlt"/>
                     <span>Data Laporan</span>
-                </a>
+                </nuxt-link>
             </li>
             <li>
-                <a href="#">
+                <nuxt-link to="tanggapan">
                     <fa :icon="fas.faClipboardList"/>
                     <span>Data Tanggapan</span>
-                </a>
+                </nuxt-link>
             </li>
             <hr class="sidebar-divider">
             <h6>Masyarakat</h6>
             <li>
-                <a href="#">
+                <nuxt-link to="/user/pengaduan">
                     <fa :icon="fas.faEnvelope"/>
                     <span>Data Pengaduan</span>
-                </a>
+                </nuxt-link>
             </li>
         </ul>
     </div>
@@ -64,10 +64,20 @@
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
+    data() {
+        return {
+            nama: ''
+        }
+    },
     computed: {
         fas () {
             return fas
         },
+        namaProfile() {            
+            const {nama} = this.$store.state.auth.loginForm.profile
+            const firstName = nama.split(' ');
+            this.nama = firstName[0]
+        }
     },
     methods: {
         closeSidebar() {
@@ -81,6 +91,9 @@ export default {
 
             console.log('ok')
         }
+    },
+    created() {
+        this.namaProfile;
     }
 }
 </script>
@@ -174,7 +187,7 @@ $primary-color: #60a5fa;
                 margin-left: 1rem;
             }
 
-            &.active {
+            .nuxt-link-active {
                 color: white;
                 background: #60a5fa;
                 padding: 0.5rem;
