@@ -12,17 +12,21 @@ export const state = () => ({
         next_page: null,
         prev_page: null
     },
-    dataEdit: {
+    profile: {
         id_masyarakat: null,
         nama: null,
         nik: null,
-        telp: null
+        telp: null,
+        foto: null
     }
 });
 
 export const getters = {
     get_current_page: state => {
         return 'test';
+    },
+    get_profile: state => {
+        return state.profile
     }
 }
 
@@ -37,6 +41,13 @@ export const mutations = {
         state.dataMasyarakat.next_page = datas.last_page;
         state.dataMasyarakat.prev_page = null;
     },
+    inputProfile(state, data) {
+        state.profile.id_masyarakat = data.id_masyarakat
+        state.profile.nama = data.nama
+        state.profile.nik = data.nik
+        state.profile.telp = data.telp
+        state.profile.foto = data.foto
+    }
 }
 
 export const actions = {

@@ -73,8 +73,8 @@ export default {
           profile: profile.data
         }
 
-        this.$store.commit('auth/loginSuccess', data)        
-
+        this.$store.commit('auth/loginSuccess', data)
+        
         this.$swal({
           icon: 'success',
           text: 'Login Berhasil',

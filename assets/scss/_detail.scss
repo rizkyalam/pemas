@@ -1,0 +1,36 @@
+.detail {
+    &-header {
+        div {
+            display: flex;
+        }
+
+        h3 {
+            display: flex;
+            align-items: center;
+        }
+    }
+    .status-button--proses {
+        @include btn ($warning-color, #fff);
+        display: flex;
+        align-items: center;
+        height: auto;
+    }
+    .status-button--done {
+        @include btn ($success-color, #fff);
+        display: flex;
+        align-items: center;
+    }
+
+    &-body {
+        .image {
+            margin-bottom: 2rem;
+        }
+        img {
+            object-fit: cover;
+            object-position: center;
+            max-width: 360px;
+            max-height: 128px;
+        }
+
+    }
+}

@@ -19,12 +19,6 @@
             <hr class="sidebar-divider">
             <h6>Admin</h6>
             <li>
-                <nuxt-link to="verify">
-                    <fa :icon="fas.faCheck"/>
-                    <span>Verifikasi Laporan</span>                    
-                </nuxt-link>
-            </li>
-            <li>
                 <nuxt-link to="/user/masyarakat">
                     <fa :icon="fas.faUser"/>
                     <span>Data Masyarakat</span>
