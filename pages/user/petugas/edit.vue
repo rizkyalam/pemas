@@ -34,7 +34,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
     layout: 'user-layout',
-    middleware: 'auth',
+    middleware: ['auth', 'level-admin'],
     data() {
         return {
             page: 'Edit Data petugas',
@@ -98,9 +98,6 @@ export default {
             }
         },
     },
-    created() {
-        console.log(this.profile);
-    }
 }
 </script>
 

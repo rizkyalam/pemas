@@ -2,7 +2,7 @@
     <div class="container">
         <Breadcrumb :title="page"/>
 
-        <div class="w-2/5 p-5 mt-5 shadow">
+        <div class="profile p-5 mt-5 shadow">
             <h2>Profile saya</h2>
             <table style="text-align: left; width: 100%;">
                 <tr>
@@ -40,7 +40,7 @@ import Breadcrumb from '~/components/Breadcrumb.vue'
 
 export default {
     layout: 'user-layout',
-    middleware: 'auth',
+    middleware: ['auth'],
     data() {
         return {
             page: 'Dashboard',
@@ -62,5 +62,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profile {
+    width: 40%;
 
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
 </style>

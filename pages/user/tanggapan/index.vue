@@ -2,15 +2,12 @@
     <div class="container">
         <Breadcrumb :title="page"/>
 
-        <div class="w-full p-5 mt-5 shadow" style="overflow-x: auto;">
-            <nuxt-link :to="'/user/pengaduan/add'" class="text-white bg-blue-500 px-3 py-2 shadow rounded">
-                <fa :icon="fas.faPlus" class="icon"/>
-                Tambah Data
-            </nuxt-link>
+        <div class="w-full mt-5 px-5 pb-5 shadow" style="overflow-x: auto;">
             <table class="table-data">
                 <thead>
                     <tr>
                         <th>No</th>  
+                        <th>Nama Pelapor</th>                      
                         <th>Tanggal</th>                      
                         <th>Status</th>
                         <th>Aksi</th>
@@ -19,6 +16,7 @@
                 <tbody v-for="(row, index) in rowsData" :key="index">
                     <tr>
                         <td>{{ ++index }}</td>
+                        <td>{{ row.nama_pelapor }}</td>
                         <td>{{ row.tgl_pengaduan }}</td>
                         <td>
                             <span 
@@ -35,7 +33,8 @@
                             </span>
                         </td>
                         <td class="p-3">
-                            <nuxt-link :to="`/user/pengaduan/detail?id=${row.id_pengaduan}`" class="text-sm bg-blue-500 shadow rounded text-white p-2">Detail</nuxt-link>
+                            <nuxt-link :to="`/user/tanggapan/detail?id=${row.id_pengaduan}`" class="text-sm bg-blue-500 shadow rounded text-white p-2">Detail</nuxt-link>
+                            <button @click="reply(row.id_pengaduan, row.status)" class="text-sm bg-green-400 shadow rounded text-white p-2">Tanggapi</button>
                         </td>
                     </tr>
                 </tbody>
@@ -50,10 +49,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
     layout: 'user-layout',
-    middleware: ['auth', 'level-masyarakat'],
+    middleware: ['auth', 'level-tanggapan'],
     data() {
         return {
-            page: 'Pengaduan',
+            page: 'Tanggapan',
             url: this.$store.state.auth.base_url,
             rows: {}
         }
@@ -69,46 +68,24 @@ export default {
             return this.rows
         }
     },    
-    async asyncData({$axios, store}) {
+    async asyncData({$axios}) {
         try {
-            const { id_masyarakat } = store.state.auth.loginForm.profile
-            const rows = await $axios.$get(`pengaduan/all/${id_masyarakat}`);
+            const rows = await $axios.$get(`tanggapan/all`);
             return { rows }
         } catch (e) {
             return { rows: [] }
         }
     },   
     methods: {
-        async deleteData(id_pengaduan, id_users) {
-
-            this.$swal({
-                title: 'Apakah anda yakin ingin menghapus data ini ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batalkan'
-            }).then(async (result) => {
-                if(result.isConfirmed) {
-
-                    await this.$axios({
-                        url: `pengaduan/delete`,
-                        method: 'post',
-                        data: { 
-                            id_pengaduan,
-                            id_users,                            
-                        }
-                    })
-
-                    this.rows = await this.$axios.$get(`pengaduan/all`);
-
-                    this.$swal({
-                        icon: 'success',
-                        title: 'Data telah terhapus !'
-                    })
-                }
-            })
+        reply(id_pengaduan, status) {
+            if (status === 'selesai') {
+                this.$swal({
+                    icon: 'error',
+                    text: 'Data telah selesai di tanggapi !'
+                })
+            } else {
+                this.$router.push(`/user/tanggapan/reply?id=${id_pengaduan}`);
+            }
         }
     },
 }

@@ -3,7 +3,7 @@
         <Breadcrumb :title="page"/>
 
         <div class="detail w-full p-5 mt-5 shadow" style="overflow-x: auto;">
-            <nuxt-link :to="'/user/pengaduan'" class="shadow text-gray-600 rounded bg-gray-300 px-3 py-2 mb-2">Kembali</nuxt-link>
+            <nuxt-link :to="'/user/tanggapan'" class="shadow text-gray-600 rounded bg-gray-300 px-3 py-2 mb-2">Kembali</nuxt-link>
             <div class="detail-header my-8">
                 <div>
                     <h3 class="mr-3">Status :</h3>
@@ -58,7 +58,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
     layout: 'user-layout',
-    middleware: ['auth', 'level-masyarakat'],
+    middleware: ['auth', 'level-tanggapan'],
     data() {
         return {
             page: 'Detail Pengaduan',

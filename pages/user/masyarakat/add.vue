@@ -47,7 +47,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
     layout: 'user-layout',
-    middleware: 'auth',
+    middleware: ['auth', 'level-admin'],
     data() {
         return {
             page: 'Tambah Data Masyarakat',

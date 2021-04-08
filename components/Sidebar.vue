@@ -17,34 +17,42 @@
                 </nuxt-link>
             </li>
             <hr class="sidebar-divider">
-            <h6>Admin</h6>
-            <li>
+
+            <!-- level admin dan petugas -->
+            <h6 v-if="level === 'admin' || level === 'petugas'">Admin</h6>
+
+            <li v-if="level === 'admin'">
                 <nuxt-link to="/user/masyarakat">
                     <fa :icon="fas.faUser"/>
                     <span>Data Masyarakat</span>
                 </nuxt-link>
             </li>
-            <li>
+
+            <li v-if="level === 'admin'">
                 <nuxt-link to="/user/petugas">
                     <fa :icon="fas.faUserTie"/>
                     <span>Data Petugas</span>
                 </nuxt-link>
             </li>
-            <li>
+            
+            <li v-if="level === 'admin'">
                 <nuxt-link to="/user/laporan">
                     <fa :icon="fas.faFileAlt"/>
                     <span>Data Laporan</span>
                 </nuxt-link>
             </li>
-            <li>
+
+            <li v-if="level === 'admin' || level === 'petugas'">
                 <nuxt-link to="/user/tanggapan">
                     <fa :icon="fas.faClipboardList"/>
                     <span>Data Tanggapan</span>
                 </nuxt-link>
             </li>
-            <hr class="sidebar-divider">
-            <h6>Masyarakat</h6>
-            <li>
+
+            <!-- level masyarakat -->
+            <hr class="sidebar-divider" v-if="level === 'masyarakat'">
+            <h6 v-if="level === 'masyarakat'">Masyarakat</h6>
+            <li v-if="level === 'masyarakat'">
                 <nuxt-link to="/user/pengaduan">
                     <fa :icon="fas.faEnvelope"/>
                     <span>Data Pengaduan</span>
@@ -60,7 +68,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 export default {
     data() {
         return {
-            nama: ''
+            nama: '',            
         }
     },
     computed: {
@@ -71,6 +79,10 @@ export default {
             const {nama} = this.$store.state.auth.loginForm.profile
             const firstName = nama.split(' ');
             this.nama = firstName[0]
+        },
+        level() {
+            const {level} = this.$store.state.auth.loginForm.profile
+            return level;
         }
     },
     methods: {
@@ -82,12 +94,11 @@ export default {
             setTimeout(() => {
                 sidebar.style.display = 'none';
             }, 500)
-
-            console.log('ok')
         }
     },
     created() {
         this.namaProfile;
+        this.level
     }
 }
 </script>

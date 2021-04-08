@@ -20,6 +20,16 @@
         display: flex;
         align-items: center;
     }
+    .status-button--valid {
+        @include btn ($success-color, #fff);
+        display: flex;
+        align-items: center;
+    }
+    .status-button--hoax {
+        @include btn ($warning-color, #fff);
+        display: flex;
+        align-items: center;
+    }
 
     &-body {
         .image {

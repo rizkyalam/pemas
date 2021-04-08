@@ -27,7 +27,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 export default {
     layout: 'user-layout',
-    middleware: 'auth',
+    middleware: ['auth', 'level-masyarakat'],
     data() {
         return {
             page: 'Tambah Data Pengaduan',

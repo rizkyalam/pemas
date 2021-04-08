@@ -45,7 +45,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     layout: 'user-layout',
-    middleware: 'auth',
+    middleware: ['auth', 'level-admin'],
     data() {
         return {
             page: 'Masyarakat',
